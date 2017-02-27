@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="bootstrapFreemakerRedis"
+  id="myeclipse.1455784383268"
+  context-root="/com"
+  j2ee-spec="6.0"
+  archive="bootstrapFreemakerRedis.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
