@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+<meta charset="UTF-8">
+<script src="../../js/jquery.1.10.2.min.js"></script>
+
+<link rel="stylesheet" href="../../css/bootstrap-3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+
+<ul class="nav nav-tabs">
+		<li ><a
+			href="cms/getArtilceByCategory.do">新增报表</a>
+		</li>
+		
+	</ul>
+	<br>
+
+
+	<form id="saveEnv" class="form-horizontal" role="form"
+		action="/env/addEnv" method="post" onsubmit="return check()">
+
+
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">测试仪名称</label>
+			<div class="col-sm-3">
+				<input type="text" id="deviceName"
+					class="form-control input-xxlarge measure-input required"
+					name="deviceName" placeholder="" value="ZR-3260型自动烟尘烟气综合测试仪">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">软件版本</label>
+			<div class="col-sm-3">
+				<input type="text" id="version"
+					class="form-control input-xxlarge measure-input required"
+					name="version" placeholder="" value="V2.01">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">报表名称</label>
+			<div class="col-sm-3">
+				<input type="text" id="reportName"
+					class="form-control input-xxlarge measure-input required"
+					name="reportName" placeholder="" value="-------- 烟尘报表 --------">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">文 件 号</label>
+			<div class="col-sm-3">
+				<input type="text" id="reportName"
+					class="form-control input-xxlarge measure-input required"
+					name="fileNo" placeholder="" value="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">采样地点</label>
+			<div class="col-sm-3">
+				<input type="text" id="reportName"
+					class="form-control input-xxlarge measure-input required"
+					name="address" placeholder="" value="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">日    期</label>
+			<div class="col-sm-3">
+				<input type="text" id="reportName"
+					class="form-control input-xxlarge measure-input required"
+					name="createTime" placeholder="" value="">
+
+			</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">滤 筒 号</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="lvtong"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">跟 踪 率</label>
+			<div class="col-sm-3">
+					<select name="genzonglv" class="form-control">
+					<option value="0.84">0.84</option>
+					<option value="0.85">0.85</option>
+					<option value="0.86">0.86</option>
+					<option value="0.87">0.87</option>
+					<option value="0.88">0.88</option>
+					<option value="0.89">0.89</option>
+					<option value="0.90">0.90</option>
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">皮托管Kp</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="pituoguan"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">采嘴直径</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="caizuizhijing"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">平均计温</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="pingjunjiwen"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">平均计压</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="pingjunjiya"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">累计采时</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="leijicaishi"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">大 气 压</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="daqiya"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">烟道截面</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="yandaojiemian"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">平均动压</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="pingjundongya"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">平均全压</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="pingjunquanya"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">平均烟温</label>
+			<div class="col-sm-3">
+				<select name="pingjunyanwen" class="form-control">
+					<option value="101.6">101.6 ℃</option>
+					<option value="101.6">102.6 ℃</option>
+					<option value="101.6">103.6 ℃</option>
+					<option value="101.6">104.6 ℃</option>
+					<option value="101.6">105.6 ℃</option>
+					<option value="101.6">106.6 ℃</option>
+					<option value="101.6">107.6 ℃</option>
+						
+					</select>
+
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">含 湿 量</label>
+			<div class="col-sm-3">
+				<select name="hanshiliang" class="form-control">
+				
+					<option value="0.096">09.6   %</option>
+						
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">O2  浓度</label>
+			<div class="col-sm-3">
+			<select name="o2nongdu" class="form-control">
+					<option value="0.043">04.3   %</option>
+				
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">SO2 浓度</label>
+			<div class="col-sm-3">
+				<select name="so2nongdu" class="form-control">
+					<option value="5.1">0005.1 mg/m3</option>
+				
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">NO  浓度</label>
+			<div class="col-sm-3">
+				<select name="nonongdu" class="form-control">
+					<option value="87.6">0087.6 mg/m3</option>
+				
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">NO2 浓度</label>
+			<div class="col-sm-3">
+				<select name="no2nongdu" class="form-control">
+					<option value="5.1">0005.1 mg/m3</option>
+				
+						
+					</select>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">负荷系数</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="fuhexishu" value="01.00"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">折算系数</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="zhesuanxishu" value="01.80"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">工况体积</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="gongkuangtiji"
+					placeholder="">
+
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="loginname" class="col-sm-2 control-label">烟尘净重</label>
+			<div class="col-sm-3">
+				<input type="text" id="keyword" class="form-control" name="yanchenjingzhong"
+					placeholder="">
+
+			</div>
+		</div>
+
+		<div
+			style="background-color: #F5F5F5; width: 100%; height: 80px; padding-top: 20px;">
+
+			<div class="col-sm-offset-2 col-sm-10">
+				<input id="btnSubmit" class="btn btn-primary" type="button" onclick="addEnv()"
+					value="保 存" />&nbsp; <input id="btnCancel" class="btn"
+					style="background-color: #FFFFFF" type="button" value="返 回"
+					onclick="history.go(-1)" />
+			</div>
+		</div>
+
+	</form>
+</body>
+
+<script type="text/javascript">
+
+function addEnv(){
+	
+	var data=$("#saveEnv").serializeArray(); 
+
+	console.log(data)
+ 	
+         $.ajax({
+             type: "post",
+             url: "/env/addEnv",
+             data: data,
+             dataType: "json",
+             success: function(data){
+                      /*    $('#resText').empty();   //清空resText里面的所有内容
+                         var html = ''; 
+                         $.each(data, function(commentIndex, comment){
+                               html += '<div class="comment"><h6>' + comment['username']
+                                         + ':</h6><p class="para"' + comment['content']
+                                         + '</p></div>';
+                         });
+                         $('#resText').html(html); */
+                         if(data.ret="sucess"){
+                        	 location.href="list.html"
+                         }
+                         else{
+                        	 alert("新增失败！")
+                         }
+                         
+                      }
+         });
+}
+
+
+</script>
+</html>

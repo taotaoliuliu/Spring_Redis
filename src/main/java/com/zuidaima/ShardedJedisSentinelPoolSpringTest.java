@@ -62,7 +62,7 @@ public class ShardedJedisSentinelPoolSpringTest {
 		
 		try {
 			jedisCluster.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

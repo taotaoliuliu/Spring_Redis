@@ -1,11 +1,6 @@
 package com.zuidaima;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
-
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
-
-import redis.clients.jedis.params.sortedset.ZAddParams;
 
 public class TestSentinel {
 	

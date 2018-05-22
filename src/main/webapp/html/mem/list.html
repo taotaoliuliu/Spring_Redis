@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	
+<script src="../../js/vue.js"></script>
+<script src="../../js/vue-resource.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+
+	<div class="container">
+		<div
+			style="margin-left: 5px; position: fixed; z-index: 1000; top: 0px; border-bottom: 3px solid #0FA6DB; width: 100%; background: #FFF;">
+
+			<button type="button" class="btn btn-default" onclick="addUI()">
+				<span class="glyphicon glyphicon-remove-sign"></span> 增加
+			</button>
+			<!-- <button type="button" class="btn btn-default">
+				<span class=" glyphicon glyphicon-circle-arrow-down"></span> 提交
+			</button>
+			<button type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-ok-circle"></span> 下载
+			</button>
+
+			<button type="button" class="btn btn-default" onclick="del()">
+				<span class="glyphicon glyphicon-ok-circle"></span> 删除
+			</button> -->
+
+
+		</div>
+		<div class="form" style="margin-top: 50px;">
+
+
+
+			<form class="form-inline" action="<%=basePath%>user/getList.do"
+				id="form"
+				style="background-color: #eeeeee; padding: 15px 15px; margin-top: 30px;"
+				method="post">
+
+				<div class="form-group">
+					<label for="exampleInputName2">文件号：</label> <input type="text"
+						class="form-control" name="loginname" id="exampleInputName2"
+						placeholder="" value="">
+				</div>
+
+			<!-- 	<div class="form-group">
+					<label for="exampleInputEmail2">作者：</label> <input type="email"
+						class="form-control" id="exampleInputEmail2" name="phone" value=""
+						placeholder="">
+				</div> -->
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">查询</button>
+				</div>
+			</form>
+
+		</div>
+
+		<div style="float: right;margin: 10px 0;">
+			<button type="button" class="btn btn-default" v-on:click="handleadd()">
+				<span class="glyphicon glyphicon-remove-sign"></span> 增加
+			</button>
+
+		</div>
+
+		<table class="table table-bordered table-hover">
+
+			<tr class="text-danger">
+				<td class="text-center">序号</td>
+				<td class="text-center">文件号</td>
+				<td class="text-center">日期</td>
+				<td class="text-center">操作</td>
+			</tr>
+			<tr v-for="(item,index) in dataList">
+				<td class="text-center">{{index+1}}</td>
+				<td class="text-center">{{item.fileNo}}</td>
+				<td class="text-center">{{item.createTime}}</td>
+				<td class="text-center">
+				
+				<button class="btn btn-sm" v-on:click="look(item)"
+						data-toggle="dialog" data-target="#layer">查看</button>
+					<button class="btn btn-danger btn-sm" v-on:click="del(item)"
+						data-toggle="dialog" data-target="#layer">删除</button>
+						
+						
+				</td>
+			</tr>
+			
+			<tr v-show="dataList.length==0">
+				<td colspan="4" class="text-center">
+					<p>暂无数据</p>
+				</td>
+			</tr>
+		</table>
+
+		<div class="page-bar">
+			<div class="page-size">
+				<div>
+					<select v-on:change="menuChange()" v-model="pageSize">
+						<option v-for="item  in menu" v-bind:value="item ">{{item}}</option>
+					</select> 记录/页，显示第 {{pageNow-1}} 至 {{pageNow*pageSize}} 项记录，共 {{totalSize}}
+					项
+				</div>
+			</div>
+			<div class="page-con">
+				<ul>
+					<li><a v-on:click="firstClick()"
+						v-bind:class="{ 'disabled': pageNow == 1}">首页</a></li>
+					<li><a v-on:click="preClick()"
+						v-bind:class="{ 'disabled': pageNow == 1}">上一页</a></li>
+					<li v-for="per in totalPage"
+						v-bind:class="{ 'active': pageNow == per}"><a
+						v-on:click="pageClick(per)">{{ per }}</a></li>
+					<li><a v-on:click="nextClick()"
+						v-bind:class="{ 'disabled': pageNow == totalPage}">下一页</a></li>
+					<li><a v-on:click="lastClick()"
+						v-bind:class="{ 'disabled': pageNow == totalPage}">尾页</a></li>
+					<li><a>共<i>{{totalPage}}</i>页
+					</a></li>
+				</ul>
+			</div>
+			<div class="clear-both"></div>
+		</div>
+		
+		
+		
+
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+
+
+	<script type="text/javascript">
+		var vue = new Vue({
+			el : '.container',
+			data : {
+				dataList : [],
+				pageSize : 5,
+				totalPage:0,
+				totalSize:0,
+				pageNow:1,
+				menu:[5, 10, 20],
+				name:"",
+				dialogVisibleAdd: false,
+				 //提交的表单
+		        form: {
+		        	name: '',
+		        	age: '',
+		        	phone: '',
+		          },
+
+			},
+
+			methods : {
+				getData : function() {
+					this.$http.get(
+							'/env/getEnvPage?' + 'pageNum=' + this.pageNow + '&pageSize='
+									+ this.pageSize+'&fileNo='+this.name).then(function(res) {
+						console.log(res)
+						this.dataList = res.body.list;
+						this.totalSize = res.body.totalSize;
+						this.totalPage = res.body.totalPage;
+						this.pageNow=res.body.env.currentPage;
+					}, function() {
+						console.log('failed');
+					});
+				},
+			  preClick: function () {
+	                if (this.pageNow > 1) {
+	                    this.pageNow--;
+	                    this.getData();
+	                }
+	            },
+	            // 下一页
+	            nextClick: function () {
+	            	alert(this.pageNow);
+	            	alert(this.totalPage);
+	                if (this.pageNow < this.totalPage) {
+	                    this.pageNow++;
+	                    this.getData();
+	                }
+	            },
+	            // 页码
+	            pageClick: function (data) {
+	                if (data != this.pageNow) {
+	                    this.pageNow = data;
+	                    this.getData();
+
+	                }
+	            },
+	            // 每页显示记录数 下拉
+	            menuChange: function () {
+	                this.getData();
+	            },
+	            
+	            handleadd:function(){
+	            this.dialogVisibleAdd=true;
+	            	
+	            },
+	            addAd:function (){
+	            	this.$http.post('/ad/addAd',{"name":this.form.name,"content":this.form.content},{emulateJSON: true}).then(function(res){
+	    				this.getData();
+	    				this.dialogVisibleAdd = false;
+	                },function(){
+	                    console.log('failed');
+	                });
+	            },
+	            del:function(item){
+	            	
+	            	this.$http.post('/ad/deleteAd',{"uuid":item.uuid},{emulateJSON: true}).then(function(res){
+	    				this.getData();
+	                },function(){
+	                    console.log('failed');
+	                });
+	            },
+	            addUI:function(){
+	            	location.href="add.html";
+	            },
+	            handleadd :function(){
+	            	location.href="add.html";
+	            },
+	            look:function(item){
+	            	location.href="look.html?uuid="+item.uuid;
+	            }
+	         
+	            
+
+			}
+
+		});
+		vue.getData();
+	</script>
+</body>
+</html>

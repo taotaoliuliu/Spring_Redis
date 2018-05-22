@@ -69,21 +69,8 @@ public class TestRedisTemplateLua {
 	@Test
 	public void test72() {
 		
-		
-
 		ApplicationContext ctx=new	ClassPathXmlApplicationContext("applicationContext.xml");
-		
-		
 		RedisTemplate redisTemplate=	(RedisTemplate) ctx.getBean("redisTemplate");
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		DefaultRedisScript<Long> script = new DefaultRedisScript<Long>();
 		/**
 		 * isexistskey.lua内容如下：
@@ -98,7 +85,7 @@ public class TestRedisTemplateLua {
 		System.out.println("script:" + script.getScriptAsString());
 		Object isExist = redisTemplate.execute(script,
 				Collections.singletonList("k2222"), new Object[] {"10","3"});
-System.out.println(isExist+"isExist");
+			System.out.println(isExist+"isExist");
 
 	
 	}
